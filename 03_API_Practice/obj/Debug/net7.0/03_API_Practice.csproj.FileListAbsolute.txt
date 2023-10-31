@@ -1,0 +1,15 @@
+D:\CSharpPractices\03_API_Practice\bin\Debug\net7.0\03_API_Practice.exe
+D:\CSharpPractices\03_API_Practice\bin\Debug\net7.0\03_API_Practice.deps.json
+D:\CSharpPractices\03_API_Practice\bin\Debug\net7.0\03_API_Practice.runtimeconfig.json
+D:\CSharpPractices\03_API_Practice\bin\Debug\net7.0\03_API_Practice.dll
+D:\CSharpPractices\03_API_Practice\bin\Debug\net7.0\03_API_Practice.pdb
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.csproj.AssemblyReference.cache
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.AssemblyInfoInputs.cache
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.AssemblyInfo.cs
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.csproj.CoreCompileInputs.cache
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.dll
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\refint\03_API_Practice.dll
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.pdb
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\03_API_Practice.genruntimeconfig.cache
+D:\CSharpPractices\03_API_Practice\obj\Debug\net7.0\ref\03_API_Practice.dll
