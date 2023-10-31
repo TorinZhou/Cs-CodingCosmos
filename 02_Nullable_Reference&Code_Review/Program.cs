@@ -4,7 +4,7 @@
 // from .net 8
 // if a type is declared as not nullable. the compiler will warn us
 
-string nonNullableString = null; // notice we get a warning here
+string nonNullableString = null!; // notice we get a warning here
 string? nullableString = null;
 
 // nullable ref types do not change how the code works.
@@ -12,5 +12,21 @@ string? nullableString = null;
 // good thing to have for IDEs and code review!
 
 
-Console.WriteLine(nullableString);
+SomeMethod(null!);
+void SomeMethod(string someString)
+{
+    Console.WriteLine(someString);
+}
+
+SomeOtherMethod(null);
+
+
+void SomeOtherMethod(string? someString)
+{
+    if (someString is not null)
+    {
+        Console.WriteLine(someString);
+    }
+}
+
 Console.ReadKey();
