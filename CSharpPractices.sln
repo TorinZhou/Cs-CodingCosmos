@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "03_API_Practice", "03_API_P
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "04_API_Practice_2", "04_API_Practice_2\04_API_Practice_2.csproj", "{036D0DC6-B8C7-42F5-B499-B675A75D9C71}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_StarWarsO=PlanetsStats_Assignment", "05_StarWarsO=PlanetsStats_Assignment\05_StarWarsO=PlanetsStats_Assignment.csproj", "{61A36854-1A6F-4361-83A0-DFB18C268E7C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "05_StarWars_PlanetsStats_Assignment", "05_StarWarsO=PlanetsStats_Assignment\05_StarWars_PlanetsStats_Assignment.csproj", "{61A36854-1A6F-4361-83A0-DFB18C268E7C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

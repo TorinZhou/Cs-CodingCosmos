@@ -14,9 +14,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\CSharpPractices\\05_StarWarsO=PlanetsStats_Assignment\\05_StarWarsO=PlanetsStats_Assignment.csproj",
-      "projectName": "05_StarWarsO=PlanetsStats_Assignment",
-      "projectPath": "D:\\CSharpPractices\\05_StarWarsO=PlanetsStats_Assignment\\05_StarWarsO=PlanetsStats_Assignment.csproj",
+      "projectUniqueName": "D:\\CSharpPractices\\05_StarWarsO=PlanetsStats_Assignment\\05_StarWars_PlanetsStats_Assignment.csproj",
+      "projectName": "05_StarWars_PlanetsStats_Assignment",
+      "projectPath": "D:\\CSharpPractices\\05_StarWarsO=PlanetsStats_Assignment\\05_StarWars_PlanetsStats_Assignment.csproj",
       "packagesPath": "C:\\Users\\zy\\.nuget\\packages\\",
       "outputPath": "D:\\CSharpPractices\\05_StarWarsO=PlanetsStats_Assignment\\obj\\",
       "projectStyle": "PackageReference",
