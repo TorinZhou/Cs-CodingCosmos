@@ -1,0 +1,15 @@
+D:\CSharpPractices\04_API_Practice_2\bin\Debug\net7.0\04_API_Practice_2.exe
+D:\CSharpPractices\04_API_Practice_2\bin\Debug\net7.0\04_API_Practice_2.deps.json
+D:\CSharpPractices\04_API_Practice_2\bin\Debug\net7.0\04_API_Practice_2.runtimeconfig.json
+D:\CSharpPractices\04_API_Practice_2\bin\Debug\net7.0\04_API_Practice_2.dll
+D:\CSharpPractices\04_API_Practice_2\bin\Debug\net7.0\04_API_Practice_2.pdb
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.csproj.AssemblyReference.cache
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.GeneratedMSBuildEditorConfig.editorconfig
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.AssemblyInfoInputs.cache
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.AssemblyInfo.cs
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.csproj.CoreCompileInputs.cache
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.dll
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\refint\04_API_Practice_2.dll
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.pdb
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\04_API_Practice_2.genruntimeconfig.cache
+D:\CSharpPractices\04_API_Practice_2\obj\Debug\net7.0\ref\04_API_Practice_2.dll
