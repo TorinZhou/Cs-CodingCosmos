@@ -1,5 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
@@ -73,6 +75,7 @@ public class UserConsoleInterface : IUserInterface
     
     public void Present(List<PlanetInfo> planetsInfos)
     {
+
         foreach (var planetInfo in planetsInfos)
         {
             Console.WriteLine(planetInfo);
@@ -176,7 +179,7 @@ public class DataToRecordStructConverter : IDataConverter
                int.TryParse(planet.diameter, out var diameter) &&
                int.TryParse(planet.surface_water, out var surfaceWater))
             {
-                planetsInfos.Add(new PlanetInfo(population, diameter, surfaceWater));
+                planetsInfos.Add(new PlanetInfo(planet.name ,population, diameter, surfaceWater));
             }
         }
         return planetsInfos;
@@ -186,10 +189,37 @@ public class DataToRecordStructConverter : IDataConverter
 
 
 //todo PlanetData
-public record struct PlanetInfo(int Population, int Diameter, int SurfaceWater)
+public record struct PlanetInfo(string Name, int Population, int Diameter, int SurfaceWater)
 {
     public override string ToString()
     {
-        return $"Population: {Population}, Diameter: {Diameter}km, Surface Water: {SurfaceWater}%";
+        return FormattedOutPut(this);
+    }
+    private static string FormattedOutPut(PlanetInfo planet)
+    {
+        StringBuilder result = new StringBuilder();
+
+        //! use reflection to get all the properties of this record
+        PropertyInfo[] properties = typeof(PlanetInfo).GetProperties();
+
+        //! Calculate the max length for each column
+        List<int> maxLengths = new();
+        foreach (PropertyInfo property in properties)
+        {
+            int nameLength = property.Name.Length;
+            int valueLength = property.GetValue(planet).ToString().Length;
+            maxLengths.Add(Math.Max(nameLength, valueLength) + 4);
+        }
+
+        //! Construct the divider
+        result.AppendLine(new string('-', maxLengths.Sum() + properties.Length - 1));
+
+        //! Construct the value row
+        for (int i = 0; i < properties.Length; i++)
+        {
+            result.Append(properties[i].GetValue(planet).ToString().PadRight(maxLengths[i]) + "|");
+        }
+
+        return result.ToString();
     }
 }
