@@ -7,7 +7,14 @@ using System.Text.Json;
 
 try
 {
-    await new StarWarsPlanetsStatsApp(new ApiDataReader(), new MockStarWarsApiDataReader()).Run();
+    await new StarWarsPlanetsStatsApp
+          (
+            new PlanetsFromApiReader
+            (
+                new ApiDataReader(), new MockStarWarsApiDataReader()
+            ),
+            new PlanetsStatisticsAnalyer()
+          ).Run();
 }
 catch (Exception ex)
 {
@@ -21,59 +28,27 @@ Console.ReadKey();
 
 public class StarWarsPlanetsStatsApp
 {
-    private readonly IApiDataReader _apiDataReader;
-    private readonly IApiDataReader _secondaryApiDataReader;
 
-    public StarWarsPlanetsStatsApp(IApiDataReader apiDataReader, IApiDataReader secondaryApiDataReader)
+    private readonly IPlanetsReader _planetsReader;
+    private readonly IPlanetsStatisticsAnalyzer _planetStatisticsAnalyzer;
+
+    public StarWarsPlanetsStatsApp(IPlanetsReader planetsReader, IPlanetsStatisticsAnalyzer planetStatisticsAnalyzer)
     {
         // By doing this, we inject the dependency into the class. Aligning with the DIP.
-        _apiDataReader = apiDataReader;
-        _secondaryApiDataReader = secondaryApiDataReader;
+        _planetsReader = planetsReader;
+        _planetStatisticsAnalyzer = planetStatisticsAnalyzer;
     }
 
     public async Task Run() // IDK why have to return Task for a async method
     {
-        string? json = null;  // this line is not my code, I don't know why explicitly assign a null here.
-        try
-        {
-            json = await _apiDataReader.Read("https://swapi.dev", "api/planets");
-        }
-        catch (HttpRequestException ex)
-        {
-            Console.WriteLine("API request was failed" + ex.Message);
-        }
-
-        json ??= await _secondaryApiDataReader.Read("https://swapi.dev", "api/planets"); 
-
-        var root = JsonSerializer.Deserialize<Root>(json);
-
-        var planets = ToPlants(root);
+        var planets = await _planetsReader.Read();
 
         foreach (var planet in planets)
         {
             Console.WriteLine(planet);
         }
 
-        var propertyNamesToSelectorsMapping = new Dictionary<string, Func<Planet, int?>>
-        {
-            ["population"] = planet => planet.Population,
-            ["diameter"] = planet => planet.Diameter,
-            ["surface water"] = planet => planet.SurfaceWater,
-        };
-
-        Console.WriteLine("Select from the following");
-        Console.WriteLine(string.Join(Environment.NewLine, propertyNamesToSelectorsMapping.Keys));
-        var userChoice = Console.ReadLine();
-
-        if(userChoice is null || !propertyNamesToSelectorsMapping.ContainsKey(userChoice))
-        {
-            Console.WriteLine("Invalid Choice");
-        }
-        else
-        {
-            ShowStatistics(planets, userChoice, propertyNamesToSelectorsMapping[userChoice]);
-            ShowStatistics(planets, userChoice, propertyNamesToSelectorsMapping[userChoice]);
-        }
+        _planetStatisticsAnalyzer.Analyze(planets);
 
 
         // This is a really ugly mapping(from a string to a func).
@@ -92,9 +67,83 @@ public class StarWarsPlanetsStatsApp
         //        break;
         //}
 
-        
+
     }
 
+
+}
+public interface IUserInteractor
+{
+    void ShowMessage(string message);
+    string? ReadFromUser();
+}
+
+public class ConsoleUserInterface : IUserInteractor
+{
+    public void ShowMessage(string message)
+    {
+        Console.WriteLine(message);
+    }
+    public string? ReadFromUser()
+    {
+        return Console.ReadLine();
+    }
+}
+
+public interface IPlanetsStatusUserInteractor
+{
+    void Show(IEnumerable<Planet> planets);
+    string? ChooseStatisticsToBeShown(IEnumerable<string> propertiesThatCanBeChosen);
+    void ShowMessage(string message);
+}
+
+public class PlanetsStatsUserInteractor : IPlanetsStatusUserInteractor
+{
+    private readonly IUserInteractor _userInteractor;
+
+    public PlanetsStatsUserInteractor(IUserInteractor userInteractor)
+    {
+        _userInteractor = userInteractor;
+    }
+    public string? ChooseStatisticsToBeShown(IEnumerable<string> propertiesThatCanBeChosen)
+    {
+        _userInteractor.ShowMessage(Environment.NewLine);
+        _userInteractor.ShowMessage("The statistics of which property would you like to see?");
+        _userInteractor.ShowMessage(string.Join(Environment.NewLine, propertiesThatCanBeChosen));
+        return _userInteractor.ReadFromUser();
+    }
+
+}
+
+public interface IPlanetsStatisticsAnalyzer
+{
+    void Analyze(IEnumerable<Planet> planets);
+}
+public class PlanetsStatisticsAnalyer : IPlanetsStatisticsAnalyzer
+{
+    public void Analyze(IEnumerable<Planet> planets)
+    {
+        var propertyNamesToSelectorsMapping = new Dictionary<string, Func<Planet, int?>>
+        {
+            ["population"] = planet => planet.Population,
+            ["diameter"] = planet => planet.Diameter,
+            ["surface water"] = planet => planet.SurfaceWater,
+        };
+
+        Console.WriteLine("Select from the following");
+        Console.WriteLine(string.Join(Environment.NewLine, propertyNamesToSelectorsMapping.Keys));
+        var userChoice = Console.ReadLine();
+
+        if (userChoice is null || !propertyNamesToSelectorsMapping.ContainsKey(userChoice))
+        {
+            Console.WriteLine("Invalid Choice");
+        }
+        else
+        {
+            ShowStatistics(planets, userChoice, propertyNamesToSelectorsMapping[userChoice]);
+            ShowStatistics(planets, userChoice, propertyNamesToSelectorsMapping[userChoice]);
+        }
+    }
     private void ShowStatistics(IEnumerable<Planet> planets, string propertyName, Func<Planet, int?> propertySelector)
     {
         ShowStatistics("Max", planets.MaxBy(propertySelector), propertySelector, propertyName);
@@ -116,9 +165,9 @@ public class StarWarsPlanetsStatsApp
         //    $"planet: {planetWithMinProperty.Name}");
     }
 
-    
+
     private void ShowStatistics(string descriptor, Planet selectPlanet, Func<Planet, int?> propertySelector, string propertyName)
-        //! this method doesn't use any class members. It could be static
+    //! this method doesn't use any class members. It could be static
     {
         // If I used Max() rather than MaxBy, LINQ would return the max population in int
         // question here, do we use reflection here, cause in the next line we use the planet name
@@ -126,8 +175,41 @@ public class StarWarsPlanetsStatsApp
             $"{propertySelector(selectPlanet)}" +
             $"planet: {selectPlanet.Name}");
     }
+}
 
+public interface IPlanetsReader
+{
+    public Task<IEnumerable<Planet>> Read();
+}
+public class PlanetsFromApiReader : IPlanetsReader
+{
+    private readonly IApiDataReader _apiDataReader;
+    private readonly IApiDataReader _secondaryApiDataReader;
 
+    public PlanetsFromApiReader(IApiDataReader apiDataReader, IApiDataReader secondaryApiDataReader)
+    {
+        _apiDataReader = apiDataReader;
+        _secondaryApiDataReader = secondaryApiDataReader;
+    }
+
+    public async Task<IEnumerable<Planet>> Read()
+    {
+        string? json = null;  // this line is not my code, I don't know why explicitly assign a null here.
+        try
+        {
+            json = await _apiDataReader.Read("https://swapi.dev", "api/planets");
+        }
+        catch (HttpRequestException ex)
+        {
+            Console.WriteLine("API request was failed" + ex.Message);
+        }
+
+        json ??= await _secondaryApiDataReader.Read("https://swapi.dev", "api/planets");
+
+        var root = JsonSerializer.Deserialize<Root>(json);
+
+        return ToPlants(root);
+    }
     private IEnumerable<Planet> ToPlants(Root? root)
     {
         if (root is null)
@@ -146,7 +228,6 @@ public class StarWarsPlanetsStatsApp
         //return planets;
     }
 }
-
 
 public readonly record struct Planet
 // Didn't make it positional, because want to use the constructor to do validating.
@@ -191,7 +272,7 @@ public static class StringExtensions
 {
     public static int? ToIntOrNull(this string? input)
     {
-        return int.TryParse(input, out var resultParsed) ? resultParsed : null ;
+        return int.TryParse(input, out var resultParsed) ? resultParsed : null;
         //int? result = null;
         //if (int.TryParse(input, out int inputParsed)) // if(false), nothing happened.
         //{
