@@ -35,11 +35,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "15_List_Performance", "15_L
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "16_Dictionaries_under_the_hood", "16_Dictionaries_under_the_hood\16_Dictionaries_under_the_hood.csproj", "{5474FCCC-B805-4F88-A2AB-B0BA19024C86}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "17_Yield_Practice", "17_Yield_Practice\17_Yield_Practice.csproj", "{893586A9-3663-4AAF-8CA1-2AD461141032}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "17_Yield_Practice", "17_Yield_Practice\17_Yield_Practice.csproj", "{893586A9-3663-4AAF-8CA1-2AD461141032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "18_Implement_IEnumerable_with_Iterators", "18_Implement_IEnumerable_with_Iterators\18_Implement_IEnumerable_with_Iterators.csproj", "{FEE82B8E-B223-4CFA-A625-2B746E9A15AE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "18_Implement_IEnumerable_with_Iterators", "18_Implement_IEnumerable_with_Iterators\18_Implement_IEnumerable_with_Iterators.csproj", "{FEE82B8E-B223-4CFA-A625-2B746E9A15AE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "19_Assignment_CustomLinkedList_Implementation", "19_Assignment_CustomLinkedList_Implementation\19_Assignment_CustomLinkedList_Implementation.csproj", "{346AEC48-475C-4B16-85FF-DBFB2AE92EE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "19_Assignment_CustomLinkedList_Implementation", "19_Assignment_CustomLinkedList_Implementation\19_Assignment_CustomLinkedList_Implementation.csproj", "{346AEC48-475C-4B16-85FF-DBFB2AE92EE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "20_Assignment_CustomLinkedList_Sample_Solution", "20_Assignment_CustomLinkedList_Sample_Solution\20_Assignment_CustomLinkedList_Sample_Solution.csproj", "{0C16B0A1-366C-46FC-9CBB-3C66EAC3A850}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -123,6 +125,10 @@ Global
 		{346AEC48-475C-4B16-85FF-DBFB2AE92EE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{346AEC48-475C-4B16-85FF-DBFB2AE92EE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{346AEC48-475C-4B16-85FF-DBFB2AE92EE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C16B0A1-366C-46FC-9CBB-3C66EAC3A850}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C16B0A1-366C-46FC-9CBB-3C66EAC3A850}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C16B0A1-366C-46FC-9CBB-3C66EAC3A850}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C16B0A1-366C-46FC-9CBB-3C66EAC3A850}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
