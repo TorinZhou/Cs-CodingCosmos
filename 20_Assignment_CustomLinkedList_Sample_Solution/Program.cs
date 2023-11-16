@@ -1,15 +1,20 @@
 ﻿using System.Collections;
 
 var testLinkedList = new CustomLinkedList<int>(2, 3, 5, 7, 8);
-testLinkedList.Add(1);
 testLinkedList.AddToFront(99);
 testLinkedList.AddToFront(98);
+testLinkedList.Add(9998);
+testLinkedList.Add(9998);
+testLinkedList.AddToEnd(9998);
+Console.WriteLine(testLinkedList.Contains(7));
+var arr = new int[9999];
+testLinkedList.CopyTo(arr, 2);
+
 foreach (var item in testLinkedList)
 {
     Console.WriteLine(item);
 }
 
-Console.WriteLine($"{testLinkedList.Remove(3)}");
 
 Console.ReadKey();
 
@@ -53,9 +58,17 @@ public class CustomLinkedList<T> : ILinkedList<T?>
 
     public void AddToEnd(T? item)
     {
-        var node = new Node<T>(item);
-        Tail.Next = node;
-        Tail = node;
+        var newNode = new Node<T>(item);
+        if (Head is null)
+        {
+            Head = newNode;
+            Tail = newNode;
+        }
+        else
+        {
+            Tail.Next = newNode;
+            Tail = newNode;
+        }
         Count++;
     }
 
@@ -76,72 +89,135 @@ public class CustomLinkedList<T> : ILinkedList<T?>
 
     public void Clear()
     {
-        throw new NotImplementedException();
+        //! this doesn't work because the IEnumerator is breaked
+        //foreach(var node in GetNodes())
+        //{
+        //    node.Next = null; 
+        //}
+        //Head = null;
+        //Tail = null;
+        //---------------------------------------------------------
+        //! this approach is slow and space-consuming because it builds a List
+        //foreach(var node in GetNodes().ToList())
+        //{
+        //    node.Next = null; 
+        //}
+        //Head = null;
+        //Tail = null;
+        Node<T>? current = Head;
+        while (current is not null)
+        {
+            Node<T>? temp = current;
+            current = current.Next;
+            temp.Next = null;
+        }
     }
 
     public bool Contains(T? item)
     {
-        var current = Head;
-        while (current is not null)
+        //var current = Head;
+        //while (current is not null)
+        //{
+        //    if (current.Value.Equals(item))
+        //    {
+        //        return true;
+        //    }
+        //    current = current.Next;
+        //}
+        //return false;
+        if(item is null)
         {
-            if (current.Value.Equals(item))
-            {
-                return true;
-            }
-            current = current.Next;
+            //! here, we can't use GetNodes().Contains(), because Contains checked the equality right away by ref, in our case, we have to provide a more complex check. so we need the Any
+            //! btw, we're benifiting from implemented the GetNodes() method previously. Because we noe can use LINQ.
+            return GetNodes().Any(node => node.Value is null);
         }
-        return false;
+        return GetNodes().Any(node => item.Equals(node.Value));
     }
 
-    public void CopyTo(T[] array, int arrayIndex)
+    public void CopyTo(T?[]? array, int arrayIndex) //! add ? after T, the array could be an array of null
     {
+        //var current = Head;
+        //int index = arrayIndex;
+        //while (current is not null)
+        //{
+        //    array[index] = current.Value;
+        //    current = current.Next;
+        //    index++;
+        //}
         if (array is null)
         {
-            throw new NullReferenceException();
+            throw new ArgumentNullException(nameof(array));
         }
-        var current = Head;
-        int index = arrayIndex;
-        while (current is not null)
+        if (arrayIndex < 0 || arrayIndex >= array.Length)
         {
-            array[index] = current.Value;
-            current = current.Next;
-            index++;
+            throw new ArgumentOutOfRangeException(nameof(arrayIndex));
+        }
+        if(array.Length < Count + arrayIndex)
+        {
+            throw new ArgumentException("Array is not long engough");
+        }
+        foreach (var item in GetNodes())
+        {
+            array[arrayIndex] = item.Value;
+            ++arrayIndex;
         }
     }
 
     public bool Remove(T? item)
     //todo remove the first node whose data is equal to the given argument, including null
     {
-        if (Head is null)
-        {
-            return false;
-        }
-        if (Head.Value.Equals(item))
-        {
-            Head = Head.Next;
-            if (Head == null) Tail = null;
-            Count--;
-            return true;
-        }
+        //if (Head is null)
+        //{
+        //    return false;
+        //}
+        //if (Head.Value.Equals(item))
+        //{
+        //    Head = Head.Next;
+        //    if (Head == null) Tail = null;
+        //    Count--;
+        //    return true;
+        //}
 
-        var current = Head;
-        while (current.Next is not null)
+        //var current = Head;
+        //while (current.Next is not null)
+        //{
+        //    if (current.Next.Value.Equals(item))
+        //    {
+        //        current.Next = current.Next.Next;
+        //        if (current.Next == null) Tail = current;
+        //        Count--;
+        //        return true;
+        //    }
+        //    current = current.Next;
+        //}
+        Node<T>? predecessor = null;
+        foreach (var node in GetNodes())
         {
-            if (current.Next.Value.Equals(item))
+            if ((node.Value is null && item is null) ||
+               (node.Value is not null && node.Value.Equals(item)))
             {
-                current.Next = current.Next.Next;
-                if (current.Next == null) Tail = current;
+                if (predecessor == null)
+                {
+                    Head = node;
+                    Count--;
+                }
+                else
+                {
+                    predecessor.Next = node.Next;
+                }
                 Count--;
-                return true;
+                break;
             }
-            current = current.Next;
+            predecessor = node;
         }
-
         return false;
     }
     public IEnumerator<T?> GetEnumerator()
     {
-        foreach(var node in GetNodes())
+        //! since we implemented the GetNodes, now we simple use it to go one step further and get the value.
+        //! we provide the logic, in this case, simply call node.Value
+        //! the yield will manage the heavylifting of implementing MoveNext(), Current(),
+        foreach (var node in GetNodes())
         {
             yield return node.Value;
         }
@@ -152,14 +228,21 @@ public class CustomLinkedList<T> : ILinkedList<T?>
         //    current = current.Next;
         //}
     }
-    private IEnumerable<Node<T>> GetNodes()
-        //! added the ability to go through the Node
-        //! Notice: it's private, we don't want to expose the underlying data structure(Nodes) of the implemetation(Linked List)
+
+    IEnumerator IEnumerable.GetEnumerator()
     {
-        if (Head is null)
-        {
-            yield break; //! I'm not sure what's this break does
-        }
+        return GetEnumerator();
+    }
+    private IEnumerable<Node<T>> GetNodes()
+    //! added the ability to go through the Node
+    //! Notice: it's private, we don't want to expose the underlying data structure(Nodes) of the implemetation(Linked List)
+    {
+        //if (Head is null)
+        //{
+        //    yield break; //! I'm not sure what's this break does
+        //    //! in a Iterator method, yield break signals the end of the sequence.
+        //    //! State Machine: When yield break is encountered, it sets the state machine to a final state, inicating there are no more elements to yield.
+        //}
         Node<T>? current = Head;
         while (current is not null)
         {
@@ -167,17 +250,12 @@ public class CustomLinkedList<T> : ILinkedList<T?>
             current = current.Next;
         }
     }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
 }
 
 public class Node<T>
 //! 1. changed from record to class to support ref base equality
 {
-    public T? Value { get; set; } //! 2. changed from init to set
+    public T? Value { get; } //! 2. changed from init to set
     public Node<T>? Next { get; set; }
 
     public Node(T? value)
