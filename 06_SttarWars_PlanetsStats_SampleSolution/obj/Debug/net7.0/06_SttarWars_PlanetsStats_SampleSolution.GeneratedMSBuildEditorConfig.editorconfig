@@ -8,4 +8,6 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = _06_SttarWars_PlanetsStats_SampleSolution
-build_property.ProjectDir = D:\CSharpPractices\06_SttarWars_PlanetsStats_SampleSolution\
+build_property.ProjectDir = /Users/yuezhou/dotnet/Cs-CodingCosmos/06_SttarWars_PlanetsStats_SampleSolution/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
