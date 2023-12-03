@@ -23,13 +23,25 @@ public class PasswordGeneratorTests
         Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, 10, true));
     }
 
-    [TestCase(10,2)]
-    [TestCase(8,5)]
-    [TestCase(6,7)]
+    [TestCase(10, 2)]
+    [TestCase(8, 5)]
+    [TestCase(9, 7)]
     public void MinLengthGreaterThanMaxLength_ShallThrowException(int minLength, int maxLength)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(()=> _cut.Generate(minLength, maxLength, true));
+        Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, maxLength, true));
     }
+
+    [TestCase(5, 10)]
+    [TestCase(4, 9)]
+    [TestCase(6, 22)]
+    [TestCase(22, 32)]
+    public void Generate_ShallGenerateCorrectLengh(int minLength, int maxLength)
+    {
+        var result = _cut.Generate(minLength, maxLength, true);
+        Assert.That(result.Length, Is.AtLeast(minLength), "Result is shorter than the minimum length.");
+        Assert.That(result.Length, Is.AtMost(maxLength), "Result is longer than the maximum length.");
+    }
+
 
     //private PasswordGenerator _cut;
     //private Mock<IRandom> _randomMock;

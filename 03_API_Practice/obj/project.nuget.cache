@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "l9m52d2qvtAKV26a+O9rY4vrg8iUJK4WrnBBXEpAKP5FA6EI6ll1K+4jHWJk7tvVlXPu6sO6uPf6mM2JJkVKSQ==",
+  "dgSpecHash": "6qvTkKMpvqpx8vITw8swI+r1PjAJyAJNvM4R5xyCqNg67lWj1dH5zwiOXDutxBbWKjdXAHIJsftgAuRY3zHgKg==",
   "success": true,
-  "projectFilePath": "D:\\CSharpPractices\\03_API_Practice\\03_API_Practice.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/03_API_Practice/03_API_Practice.csproj",
+  "expectedPackageFiles": [
+    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.ref/7.0.14/microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "/Users/yuezhou/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.14/microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.14/microsoft.netcore.app.host.osx-arm64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }

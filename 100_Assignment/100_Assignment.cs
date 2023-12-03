@@ -9,7 +9,7 @@ public class PasswordGenerator
 {
     private static readonly Random rand = new Random();
 
-    public  string Generate(
+    public string Generate(
         int left, int right, bool useSpecial)
     {
         //validate max and min length
