@@ -1,8 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "/n9jqxtRy2e54V8pNDDCZyJPv4eQQeF+LIDgqMT2nyatcDp7yXT5LjT6WBIYjw+0EDYOgkZvt9FOd+0AmeLagw==",
+  "dgSpecHash": "/M01+HiYJXEXyoxoOmdYINRBG+0hYFmPwEEEt4y+okhKkUdUmYPZ0Me8pqLZmVcPSbFSLrSeOV6+RNErNl4lIA==",
   "success": true,
-  "projectFilePath": "D:\\CSharpPractices\\06_SttarWars_PlanetsStats_SampleSolution\\06_SttarWars_PlanetsStats_SampleSolution.csproj",
-  "expectedPackageFiles": [],
+  "projectFilePath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/06_SttarWars_PlanetsStats_SampleSolution/06_SttarWars_PlanetsStats_SampleSolution.csproj",
+  "expectedPackageFiles": [
+    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.ref/7.0.14/microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
+    "/Users/yuezhou/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.14/microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
+    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.14/microsoft.netcore.app.host.osx-arm64.7.0.14.nupkg.sha512"
+  ],
   "logs": []
 }
