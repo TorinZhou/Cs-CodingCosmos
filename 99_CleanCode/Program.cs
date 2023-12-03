@@ -1,29 +1,41 @@
 ﻿using static System.Console;
-bool shallReadFromDatabase = false;
-PersonDataFormatter personalDataFormatter = (shallReadFromDatabase) ?
-    new DatabaseSourcePersonalDataFormatter() :
-    new ExcelSourcePersonalDataFormatter();
+bool shallReadFromDatabase = true;
+var personalDataFormatter = (shallReadFromDatabase) ?
+    new PersonDataFormatter(new DatabaseSourcePersonalDataReader()) :
+    new PersonDataFormatter(new ExcelSourcePersonalDataReader());
 WriteLine(personalDataFormatter.Format());
 
 ReadKey();
-record struct Person(string Name, int YearOfBirth, string Country);
-abstract class PersonDataFormatter
+
+interface IPersonalDataReader
 {
+    IEnumerable<Person> ReadPeople();
+}
+record struct Person(string Name, int YearOfBirth, string Country);
+
+class PersonDataFormatter
+{
+    private readonly IPersonalDataReader _personDataReader;
+
+    public PersonDataFormatter(IPersonalDataReader personDataReader)
+    {
+        _personDataReader = personDataReader;
+    }
+
     public string Format()
     {
-        var people = ReadPeople();
+        var people = _personDataReader.ReadPeople();
         return string.Join("\n",
             people.Select(people => $"{people.Name} born in" +
             $" {people.Country} on {people.YearOfBirth}"));
     }
 
-    public abstract IEnumerable<Person> ReadPeople();
 }
 
-class DatabaseSourcePersonalDataFormatter : PersonDataFormatter
+class DatabaseSourcePersonalDataReader : IPersonalDataReader
 {
 
-    public override IEnumerable<Person> ReadPeople()
+    public IEnumerable<Person> ReadPeople()
     {
         WriteLine("Reading from database");
         return new List<Person>
@@ -35,10 +47,10 @@ class DatabaseSourcePersonalDataFormatter : PersonDataFormatter
     }
 }
 
-class ExcelSourcePersonalDataFormatter : PersonDataFormatter
+class ExcelSourcePersonalDataReader : IPersonalDataReader
 {
 
-    public override IEnumerable<Person> ReadPeople()
+    public IEnumerable<Person> ReadPeople()
     {
         WriteLine("Reading from Excel File");
         return new List<Person>
