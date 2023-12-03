@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "Mcr+luhX3GO3Rybp58FIw+dt/a1KFufXQ+O10u936JIQrXJApyZk+/Xtkmnb+tPgEmpdVyAeNtZDQkzOY7a90A==",
+  "dgSpecHash": "CHg1tqOpcaLxD3zlqnXVYue/aDGJr4BDGXP2ZSDx9HWk6VmDvNbN4spWRWfRpPFFfruWxTiE/GAWDVFXd4IbLw==",
   "success": true,
-  "projectFilePath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/01_Nullable/01_Nullable.csproj",
-  "expectedPackageFiles": [
-    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.ref/7.0.14/microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
-    "/Users/yuezhou/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.14/microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
-    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.14/microsoft.netcore.app.host.osx-arm64.7.0.14.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\CSharpPractices\\01_Nullable\\01_Nullable.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

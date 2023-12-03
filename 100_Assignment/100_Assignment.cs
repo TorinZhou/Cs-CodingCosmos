@@ -1,14 +1,15 @@
-﻿for (int i = 0; i < 10; i++)
+﻿var passwordGenerator = new PasswordGenerator();
+for (int i = 0; i < 10; i++)
 {
-    Console.WriteLine(Pwd.Generate(5, 10, false));
+    Console.WriteLine(passwordGenerator.Generate(5, 10, false));
 }
 Console.ReadKey();
 
-public class Pwd
+public class PasswordGenerator
 {
     private static readonly Random rand = new Random();
 
-    public static string Generate(
+    public  string Generate(
         int left, int right, bool useSpecial)
     {
         //validate max and min length

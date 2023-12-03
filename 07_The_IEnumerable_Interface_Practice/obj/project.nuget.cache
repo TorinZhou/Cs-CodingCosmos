@@ -1,12 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "pM1OZjQ2bAD9dGpVBFVA2EKor+zEFZknV8PA6rg4f8RppGNNPrp3/eBrgwqcOL4uxyV7Eifrz96DwN1gD+Cupg==",
+  "dgSpecHash": "NEBUktMdM0GCwDkgMW4u44buJOxcXN7/vbkls8B4SE6DUIM3xhBp4V9gbGGS9ncfwM7riNsIb+FfOv3bq9dWcg==",
   "success": true,
-  "projectFilePath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/07_The_IEnumerable_Interface_Practice/07_The_IEnumerable_Interface_Practice.csproj",
-  "expectedPackageFiles": [
-    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.ref/7.0.14/microsoft.netcore.app.ref.7.0.14.nupkg.sha512",
-    "/Users/yuezhou/.nuget/packages/microsoft.aspnetcore.app.ref/7.0.14/microsoft.aspnetcore.app.ref.7.0.14.nupkg.sha512",
-    "/Users/yuezhou/.nuget/packages/microsoft.netcore.app.host.osx-arm64/7.0.14/microsoft.netcore.app.host.osx-arm64.7.0.14.nupkg.sha512"
-  ],
+  "projectFilePath": "D:\\CSharpPractices\\07_The_IEnumerable_Interface_Practice\\07_The_IEnumerable_Interface_Practice.csproj",
+  "expectedPackageFiles": [],
   "logs": []
 }

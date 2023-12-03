@@ -8,24 +8,31 @@
     "net7.0": []
   },
   "packageFolders": {
-    "/Users/yuezhou/.nuget/packages/": {}
+    "C:\\Users\\zy\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/yuezhou/dotnet/Cs-CodingCosmos/07_The_IEnumerable_Interface_Practice/07_The_IEnumerable_Interface_Practice.csproj",
+      "projectUniqueName": "D:\\CSharpPractices\\07_The_IEnumerable_Interface_Practice\\07_The_IEnumerable_Interface_Practice.csproj",
       "projectName": "07_The_IEnumerable_Interface_Practice",
-      "projectPath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/07_The_IEnumerable_Interface_Practice/07_The_IEnumerable_Interface_Practice.csproj",
-      "packagesPath": "/Users/yuezhou/.nuget/packages/",
-      "outputPath": "/Users/yuezhou/dotnet/Cs-CodingCosmos/07_The_IEnumerable_Interface_Practice/obj/",
+      "projectPath": "D:\\CSharpPractices\\07_The_IEnumerable_Interface_Practice\\07_The_IEnumerable_Interface_Practice.csproj",
+      "packagesPath": "C:\\Users\\zy\\.nuget\\packages\\",
+      "outputPath": "D:\\CSharpPractices\\07_The_IEnumerable_Interface_Practice\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "/Users/yuezhou/.nuget/NuGet/NuGet.Config"
+        "C:\\Users\\zy\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -54,26 +61,12 @@
         ],
         "assetTargetFallback": true,
         "warn": true,
-        "downloadDependencies": [
-          {
-            "name": "Microsoft.AspNetCore.App.Ref",
-            "version": "[7.0.14, 7.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Host.osx-arm64",
-            "version": "[7.0.14, 7.0.14]"
-          },
-          {
-            "name": "Microsoft.NETCore.App.Ref",
-            "version": "[7.0.14, 7.0.14]"
-          }
-        ],
         "frameworkReferences": {
           "Microsoft.NETCore.App": {
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/8.0.100/RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
