@@ -8,19 +8,24 @@ using System;
 public class PasswordGeneratorTests
 {
     private PasswordGenerator _cut;
+    private Mock<IRandomIntAlgorithm> _randomIntAlgorithMock;
+    private Mock<ICharacterProvider> _characterProvider;
 
     [SetUp]
     public void SetUp()
     {
-        _cut = new PasswordGenerator();
+        _randomIntAlgorithMock = new Mock<IRandomIntAlgorithm>();
+        _characterProvider = new Mock<ICharacterProvider>();
+        _cut = new PasswordGenerator(_randomIntAlgorithMock.Object, _characterProvider.Object);
     }
+
 
     [TestCase(0)]
     [TestCase(-1)]
     [TestCase(-100)]
     public void MinLengthSmallerThan1_ShallThrowException(int minLength)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, 10, true));
+        Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, 10));
     }
 
     [TestCase(10, 2)]
@@ -28,7 +33,7 @@ public class PasswordGeneratorTests
     [TestCase(9, 7)]
     public void MinLengthGreaterThanMaxLength_ShallThrowException(int minLength, int maxLength)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, maxLength, true));
+        Assert.Throws<ArgumentOutOfRangeException>(() => _cut.Generate(minLength, maxLength));
     }
 
     [TestCase(5, 10)]
@@ -37,11 +42,15 @@ public class PasswordGeneratorTests
     [TestCase(22, 32)]
     public void Generate_ShallGenerateCorrectLengh(int minLength, int maxLength)
     {
-        var result = _cut.Generate(minLength, maxLength, true);
+        _randomIntAlgorithMock.Setup(mock => mock.Next(It.IsAny<int>(), It.IsAny<int>()))
+            .Returns(minLength);
+        _characterProvider.Setup(mock => mock.GetCharacters()).Returns("ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-+=");
+        var result = _cut.Generate(minLength, maxLength);
         Assert.That(result.Length, Is.AtLeast(minLength), "Result is shorter than the minimum length.");
         Assert.That(result.Length, Is.AtMost(maxLength), "Result is longer than the maximum length.");
     }
 
+    // public void Generate_ShallContainSpeialCharactor_IfUseSpecial
 
     //private PasswordGenerator _cut;
     //private Mock<IRandom> _randomMock;
